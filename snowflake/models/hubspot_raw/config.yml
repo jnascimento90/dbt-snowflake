@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+  - name: public
+    description: Replica
+    tables:
+      - name: hubspot
+
+models:
+  - name: deals_properties
+    config:
+      delta_hours: '1 DAY'
+      timestamp_column: '_airbyte_emitted_at'
+      tags: ['hubspot']
+    columns:
+      - name: id
+        tests:
+          - unique
+          - not_null
