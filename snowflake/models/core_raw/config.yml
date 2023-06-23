@@ -35,5 +35,7 @@ models:
   - name: people_raw_json_split
     config:
       schema: public
+      tags: ['people']
+
 
 
