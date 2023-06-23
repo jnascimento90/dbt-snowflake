@@ -32,4 +32,8 @@ models:
         tests:
           - unique
           - not_null
+  - name: people_raw_json_split
+    config:
+      schema: public
+
 
