@@ -6,7 +6,7 @@ from snowflake.snowpark.functions import col
 import json
 import pandas as pd
 
-def main(session: snowpark.Session):
+def model(session: snowpark.Session):
     
     tableName = 'public._AIRBYTE_RAW_PEOPLE_RAW'
     dataframe = session.table(tableName)
