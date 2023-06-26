@@ -7,6 +7,8 @@ sources:
       - name: addresses
         description: Contains addresses of the photographers
       - name: children
+      - name: people_raw
+      - name: people_raw_json_split
 
 models:
   - name: addresses
