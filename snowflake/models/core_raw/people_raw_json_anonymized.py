@@ -11,7 +11,7 @@ def model(dbt, session):
     dbt.config(materialized="table")
     
     df = dbt.source('public', 'people_raw_json_split').to_pandas()
-    df['FAMILY_NAME'] = df['FAMILY_NAME'].apply(encoding)
-    del df['GIVEN_NAME']
+    df['family_name'] = df['family_name'].apply(encoding)
+    del df['given_name']
 
     return df
