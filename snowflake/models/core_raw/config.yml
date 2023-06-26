@@ -6,8 +6,6 @@ sources:
     tables:
       - name: addresses
         description: Contains addresses of the photographers
-      - name: people_raw
-      - name: people_raw_json_split
       - name: children
 
 models:
@@ -32,10 +30,6 @@ models:
         tests:
           - unique
           - not_null
-  - name: people_raw_json_split
-    config:
-      schema: public
-      tags: ['people']
 
 
 
