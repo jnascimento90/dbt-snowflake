@@ -8,7 +8,7 @@ import pandas as pd
 
 def model(dbt, session: snowpark.Session):
     
-    tableName = 'public._AIRBYTE_RAW_PEOPLE_RAW'
+    tableName = '_AIRBYTE_RAW_PEOPLE_RAW'
     dataframe = session.table(tableName)
     
     #df = dataframe['_AIRBYTE_DATA']
