@@ -16,6 +16,6 @@ def model(dbt, session):
 
     # fix datetime
     df["_AIRBYTE_EMITTED_AT"] = df["_AIRBYTE_EMITTED_AT"]/1000000
-    df["_AIRBYTE_EMITTED_AT"] = pd.to_datetime(df["_AIRBYTE_EMITTED_AT"],unit='s')
+    #df["_AIRBYTE_EMITTED_AT"] = pd.to_datetime(df["_AIRBYTE_EMITTED_AT"],unit='s')
 
     return df
