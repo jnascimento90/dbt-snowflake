@@ -28,7 +28,7 @@ def model(dbt, session: snowpark.Session):
     
     dataframe_pd['family_name'] = dataframe_pd['family_name'].apply(encoding)
     del dataframe_pd['given_name']
-    #dataframe_pd["_AIRBYTE_EMITTED_AT"] = pd.to_datetime(dataframe_pd["_AIRBYTE_EMITTED_AT"],unit='us')
+    dataframe_pd["_AIRBYTE_EMITTED_AT"] = pd.to_datetime(dataframe_pd["_AIRBYTE_EMITTED_AT"],unit='us')
 
     # create a new snowpark dataframe from this pandas dataset
     new_dataframe = session.create_dataframe(dataframe_pd)
