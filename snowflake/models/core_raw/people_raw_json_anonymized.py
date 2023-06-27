@@ -1,5 +1,12 @@
+# The Snowpark package is required for Python Worksheets.
+# You can add more packages by selecting them using the Packages control and then importing them.
+
+import snowflake.snowpark as snowpark
+from snowflake.snowpark.functions import col
+import json
+import pandas as pd
+import datetime
 import base64
-import pandas
 
 def encoding(x):
     x = x.encode("ascii")
@@ -7,23 +14,27 @@ def encoding(x):
     return base64_bytes.decode("ascii")
     
     
-def model(dbt, session):
-    dbt.config(materialized="table")
+def model(dbt, session: snowpark.Session):
     
-    df = dbt.source('public', 'people_raw_json_split').to_pandas()
-    df['family_name'] = df['family_name'].apply(encoding)
-    del df['given_name']
-
-    print(df)
+    #dbt.config(materialized="table")
+    #df = dbt.source('public', 'people_raw_json_split').to_pandas()
     
-    # fix datetime
-    #df["_AIRBYTE_EMITTED_AT"] = df["_AIRBYTE_EMITTED_AT"].div(1000000)
-    #df["_AIRBYTE_EMITTED_AT"] = pd.to_datetime(df["_AIRBYTE_EMITTED_AT"],unit='s')
-    df["_AIRBYTE_EMITTED_AT"] = pandas.to_datetime(df["_AIRBYTE_EMITTED_AT"],unit='us')
+    tableName = 'public.PEOPLE_RAW_JSON_SPLIT'
+    dataframe = session.table(tableName)
 
-    print(df)
+    # transform the dataframe into a pandas df
+    dataframe_pd = dataframe.toPandas()
+
     
-    #df = df.drop('_AIRBYTE_AB_ID', axis=1)
-    #df = df.drop('_AIRBYTE_EMITTED_AT', axis=1)
+    dataframe_pd['family_name'] = dataframe_pd['family_name'].apply(encoding)
+    del dataframe_pd['given_name']
+    #dataframe_pd["_AIRBYTE_EMITTED_AT"] = pd.to_datetime(dataframe_pd["_AIRBYTE_EMITTED_AT"],unit='us')
 
-    return df
+    # create a new snowpark dataframe from this pandas dataset
+    new_dataframe = session.create_dataframe(all_df)
+    
+    # Print a sample of the dataframe to standard output.
+    new_dataframe.show()
+    
+    # Return value will appear in the Results tab.
+    return new_dataframe
