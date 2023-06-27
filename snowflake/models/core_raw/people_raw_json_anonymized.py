@@ -31,7 +31,7 @@ def model(dbt, session: snowpark.Session):
     #dataframe_pd["_AIRBYTE_EMITTED_AT"] = pd.to_datetime(dataframe_pd["_AIRBYTE_EMITTED_AT"],unit='us')
 
     # create a new snowpark dataframe from this pandas dataset
-    new_dataframe = session.create_dataframe(all_df)
+    new_dataframe = session.create_dataframe(dataframe_pd)
     
     # Print a sample of the dataframe to standard output.
     new_dataframe.show()
