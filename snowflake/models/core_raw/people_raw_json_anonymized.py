@@ -14,11 +14,15 @@ def model(dbt, session):
     df['family_name'] = df['family_name'].apply(encoding)
     del df['given_name']
 
+    print(df)
+    
     # fix datetime
     #df["_AIRBYTE_EMITTED_AT"] = df["_AIRBYTE_EMITTED_AT"].div(1000000)
     #df["_AIRBYTE_EMITTED_AT"] = pd.to_datetime(df["_AIRBYTE_EMITTED_AT"],unit='s')
     df["_AIRBYTE_EMITTED_AT"] = pandas.to_datetime(df["_AIRBYTE_EMITTED_AT"],unit='us')
 
+    print(df)
+    
     #df = df.drop('_AIRBYTE_AB_ID', axis=1)
     #df = df.drop('_AIRBYTE_EMITTED_AT', axis=1)
 
