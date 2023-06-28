@@ -15,6 +15,7 @@ def model(dbt, session):
     del df['given_name']
 
     # fix datetime
-    df["_AIRBYTE_EMITTED_AT"] = pandas.to_datetime(df["_AIRBYTE_EMITTED_AT"],unit='us')
+    #df["_AIRBYTE_EMITTED_AT"] = pandas.to_datetime(df["_AIRBYTE_EMITTED_AT"],unit='us')
+    df["_AIRBYTE_EMITTED_AT"] = df["_AIRBYTE_EMITTED_AT"].dt.tz_localize('UTC')
 
     return df
