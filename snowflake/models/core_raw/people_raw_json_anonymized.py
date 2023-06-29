@@ -18,6 +18,7 @@ def model(dbt, session):
     #df["_AIRBYTE_EMITTED_AT"] = pandas.to_datetime(df["_AIRBYTE_EMITTED_AT"],unit='us')
     df["_AIRBYTE_EMITTED_AT"] = df["_AIRBYTE_EMITTED_AT"].dt.tz_localize('UTC')
 
-    session.write_pandas(df, 'PEOPLE_RAW_JSON_SPLIT')
+    #session.write_pandas(df, 'PEOPLE_RAW_JSON_SPLIT')
+    df.to_sql('PEOPLE_RAW_JSON_SPLIT', con=session, if_exists='replace')
     
     return df
