@@ -20,7 +20,5 @@ def model(dbt, session):
 
     session.write_pandas(df, 'PEOPLE_RAW_JSON_SPLIT', overwrite=True)
     #df.to_sql('PEOPLE_RAW_JSON_SPLIT', con=session, if_exists='replace')
-
-    test_df = pandas.DataFrame()
     
-    return test_df
+    return df
