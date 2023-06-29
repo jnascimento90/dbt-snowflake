@@ -23,4 +23,4 @@ def model(dbt, session):
 
     test_df = pandas.DataFrame()
     
-    return test_df
+    return df
