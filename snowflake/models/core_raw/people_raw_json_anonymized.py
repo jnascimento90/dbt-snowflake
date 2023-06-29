@@ -8,7 +8,7 @@ def encoding(x):
     
     
 def model(dbt, session):
-    dbt.config(materialized="table")
+    dbt.config(materialized="ephemeral")
     
     df = dbt.source('public', 'people_raw_json_split').to_pandas()
     df['family_name'] = df['family_name'].apply(encoding)
