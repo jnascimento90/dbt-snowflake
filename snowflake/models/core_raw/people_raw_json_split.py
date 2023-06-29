@@ -8,7 +8,7 @@ import pandas as pd
 
 def model(dbt, session: snowpark.Session):
 
-    dbt.config(materialized="ephemeral")
+    #dbt.config(materialized="ephemeral")
     
     tableName = '_AIRBYTE_RAW_PEOPLE_RAW'
     dataframe = session.table(tableName)
