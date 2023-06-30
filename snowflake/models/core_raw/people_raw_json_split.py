@@ -5,6 +5,14 @@ import snowflake.snowpark as snowpark
 from snowflake.snowpark.functions import col
 import json
 import pandas as pd
+import base64
+
+
+def encoding(x):
+    x = x.encode("ascii")
+    base64_bytes = base64.b64encode(x)
+    return base64_bytes.decode("ascii")
+
 
 def model(dbt, session: snowpark.Session):
 
@@ -34,7 +42,11 @@ def model(dbt, session: snowpark.Session):
         row_df = pd.DataFrame(res, index=[0])
         airbyte_data_split = pd.concat([airbyte_data_split, row_df], ignore_index=True)
 
-        
+
+    # apply encoding and delete given name
+    airbyte_data_split['family_name'] = airbyte_data_split['family_name'].apply(encoding)
+    del airbyte_data_split['given_name']
+    
     # join with the original dataframe and remove the old column data
     all_df = airbyte_data_split.join(dataframe_pd)
     all_df = all_df.drop(['_AIRBYTE_DATA'], axis=1)
